@@ -2,8 +2,8 @@
 
 **WARNING: This project is experimental and work-in-progress, DO NOT USE IN PRODUCTION.**
 
-![Build & Test (Core)](https://github.com/spacecomputerio/threshold/actions/workflows/core.yml/badge.svg?branch=main)
-![Build & Test (CLI)](https://github.com/spacecomputerio/threshold/actions/workflows/cli.yml/badge.svg?branch=main)
+![Build & Test (Core)](https://github.com/spacecomputer-io/threshold/actions/workflows/core.yml/badge.svg?branch=main)
+![Build & Test (CLI)](https://github.com/spacecomputer-io/threshold/actions/workflows/cli.yml/badge.svg?branch=main)
 
 This repo contains the threshold cryptography (experimental) implementation for the SpaceComputer ecosystem.
 
