@@ -478,4 +478,30 @@ mod tests {
         let decrypted = decryptor.decrypt(pk.encrypt(b"wrong-message")).unwrap();
         assert_ne!(decrypted, b"test-message");
     }
+
+    #[test]
+    fn test_decryptor_fails_on_single_bad_share() {
+        let n = 7;
+        let t = 5;
+        let mut committee = Committee::new(n, t);
+        let mut some_other_committee = Committee::new(n, t);
+        let decryptor = ShareDecryptor::new(committee.pk_set.clone());
+
+        let pk = committee.pk_set.public_key();
+        let ciphertext = pk.encrypt(b"test-message");
+        for i in 0..t {
+            let actor = committee.get_actor(i);
+            let dec_share = actor.decrypt_share(ciphertext.clone()).unwrap();
+            println!("adding {i}, {}", t);
+            decryptor.add_share(i, dec_share).unwrap();
+        }
+
+        // Add a bad share (from another committee)
+        let actor = some_other_committee.get_actor(t);
+        let dec_share = actor.decrypt_share(ciphertext.clone()).unwrap();
+        decryptor.add_share(t, dec_share).unwrap();
+
+        let decrypted = decryptor.decrypt(ciphertext).unwrap();
+        assert_ne!(decrypted, b"test-message")
+    }
 }
