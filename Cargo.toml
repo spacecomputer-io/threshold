@@ -3,3 +3,5 @@ members = [
     "threshold",
     "cli", "tgrpc",
 ]
+
+resolver = "3"
